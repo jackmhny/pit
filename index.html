@@ -15,31 +15,20 @@
 
     </ul>
     <script>
-        major_events = []
+        const major_list_ul = document.getElementById("majors")
 
         for (let index = 0; index < emergency_data.length; index++) {
             const event = emergency_data[index];
             if (event.type == "major" && event.timestamp > Date.now()) {
-                major_events.push(event)
-                console.log(
-                    event.event +
-                    "\nAT\n" +
+                let major_li = document.createElement("li")
+                item_text = [
+                    event.event,
+                    " @ ",
                     new Date(event.timestamp).toLocaleTimeString()
-                )
+                ].join('')
+                major_li.innerText = item_text
+                major_list_ul.appendChild(major_li)
             }
-        }
-
-        for (let index = 0; index < major_events.length; index++) {
-            const major_event = major_events[index];
-            const major_list_ul = document.getElementById("majors")
-            let major_li = document.createElement("li")
-            item_text = [
-                major_event.event,
-                " @ ",
-                new Date(major_event.timestamp).toLocaleTimeString()
-            ].join('')
-            major_li.innerText = item_text
-            major_list_ul.appendChild(major_li)
         }
     </script>
 </body>

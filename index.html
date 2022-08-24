@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pit</title>
+    <script src="./pit/emergency.js"></script>
+</head>
+
+<body>
+    <h1>Incoming Major Events:</h1>
+    <ul id="majors">
+
+    </ul>
+    <script>
+        major_events = []
+
+        for (let index = 0; index < emergency_data.length; index++) {
+            const event = emergency_data[index];
+            if (event.type == "major" && event.timestamp > Date.now()) {
+                major_events.push(event)
+                console.log(
+                    event.event +
+                    "\nAT\n" +
+                    new Date(event.timestamp).toLocaleTimeString()
+                )
+            }
+        }
+
+        for (let index = 0; index < major_events.length; index++) {
+            const major_event = major_events[index];
+            const major_list_ul = document.getElementById("majors")
+            let major_li = document.createElement("li")
+            item_text = [
+                major_event.event,
+                " @ ",
+                new Date(major_event.timestamp).toLocaleTimeString()
+            ].join('')
+            major_li.innerText = item_text
+            major_list_ul.appendChild(major_li)
+        }
+    </script>
+</body>
+
+</html>
